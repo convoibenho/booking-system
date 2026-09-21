@@ -3,160 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Đăng ký Phòng & Vật tư</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Hệ Thống Đăng Ký Phòng & Vật Tư - Đồng Bộ Trực Tuyến</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FullCalendar CSS & JS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-gray-50 font-sans">
 
     <!-- Header -->
-    <header class="bg-blue-600 text-white shadow-md">
+    <header class="bg-indigo-600 text-white shadow-md">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold">🏢 Hệ Thống Đăng Ký Phòng & Vật Tư</h1>
-            <span class="text-sm bg-blue-700 px-3 py-1 rounded-full">Trực tuyến</span>
+            <h1 class="text-xl font-bold">🏢 Lịch Đặt Phòng & Vật Tư Trực Tuyến</h1>
+            <span class="text-xs bg-indigo-700 px-3 py-1 rounded-full border border-indigo-500">Đang hoạt động 24/7</span>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <main class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <!-- Form Đăng ký -->
-        <section class="bg-white p-6 rounded-xl shadow-md md:col-span-1">
+        <!-- Cột Trái: Form Đăng Ký -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-1 h-fit">
             <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">📝 Tạo Đăng Ký Mới</h2>
             <form id="bookingForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Họ và tên người đăng ký</label>
-                    <input type="text" id="fullName" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nhập tên của bạn">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
+                    <input type="text" id="fullName" required class="w-full px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Nhập tên của bạn">
                 </div>
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Loại tài nguyên</label>
-                    <select id="resourceType" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="resourceType" class="w-full px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <option value="Phòng họp / Phòng học">Phòng họp / Phòng học</option>
-                        <option value="Thiết bị / Vật tư (Máy chiếu, Micro...)">Thiết bị / Vật tư (Máy chiếu, Micro...)</option>
+                        <option value="Thiết bị / Vật tư">Thiết bị / Vật tư (Máy chiếu, Micro...)</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Tên Phòng / Vật tư cụ thể</label>
-                    <input type="text" id="resourceName" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ví dụ: Phòng A201 hoặc Máy chiếu số 02">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tên cụ thể (Phòng/Vật tư)</label>
+                    <input type="text" id="resourceName" required class="w-full px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Ví dụ: Phòng B211 hoặc Máy chiếu 01">
                 </div>
 
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-1 gap-3">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Thời gian bắt đầu</label>
-                        <input type="datetime-local" id="startTime" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Bắt đầu</label>
+                        <input type="datetime-local" id="startTime" required class="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Thời gian kết thúc</label>
-                        <input type="datetime-local" id="endTime" required class="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Kết thúc</label>
+                        <input type="datetime-local" id="endTime" required class="w-full px-3 py-2 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Mục đích sử dụng</label>
-                    <textarea id="purpose" rows="2" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nhập mục đích..."></textarea>
+                    <textarea id="purpose" rows="2" class="w-full px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Nhập mục đích..."></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition">Gửi Đăng Ký</button>
+                <button type="submit" id="submitBtn" class="w-full bg-indigo-600 text-white py-2.5 rounded-xl font-medium hover:bg-indigo-700 transition shadow-sm">Gửi Đăng Ký</button>
             </form>
         </section>
 
-        <!-- Danh sách đã đăng ký -->
-        <section class="bg-white p-6 rounded-xl shadow-md md:col-span-2">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">📊 Danh Sách Đã Đăng Ký</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-100 text-gray-600 text-sm">
-                            <th class="p-3">Người đăng ký</th>
-                            <th class="p-3">Tài nguyên</th>
-                            <th class="p-3">Thời gian</th>
-                            <th class="p-3">Mục đích</th>
-                            <th class="p-3 text-center">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="bookingTableBody" class="text-sm text-gray-700 divide-y">
-                        <!-- Dữ liệu sẽ được chèn tự động bằng JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-            <div id="emptyState" class="text-center py-8 text-gray-400">Chưa có lịch đăng ký nào được tạo.</div>
+        <!-- Cột Phải: Giao Diện Lịch Trực Quan -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 lg:col-span-2">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">📅 Lịch Biểu Đặt Phòng & Thiết Bị Chung</h2>
+            <div id="calendar" class="min-h-[500px]"></div>
         </section>
 
     </main>
 
-    <!-- JavaScript Xử lý -->
+    <!-- JavaScript Logic kết nối Supabase và Lịch -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('bookingForm');
-            const tableBody = document.getElementById('bookingTableBody');
-            const emptyState = document.getElementById('emptyState');
+        // --- BẠN SẼ THAY THẾ 2 DÒNG DƯỚI ĐÂY BẰNG THÔNG TIN TỪ SUPABASE CỦA BẠN ---
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        // --------------------------------------------------------------------------
 
-            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        let supabaseClient = null;
+        if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
 
-            function renderBookings() {
-                tableBody.innerHTML = '';
-                if (bookings.length === 0) {
-                    emptyState.style.display = 'block';
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                locale: 'vi',
+                events: [] // Dữ liệu lịch sẽ được load từ database
+            });
+            calendar.render();
+
+            async function loadBookings() {
+                if (!supabaseClient) {
+                    calendarEl.innerHTML = '<div class="p-4 text-amber-600 bg-amber-50 rounded-xl">⚠️ Vui lòng cấu hình Supabase URL và Anon Key trong mã nguồn để hiển thị dữ liệu trực tuyến chung cho mọi người.</div>';
                     return;
                 }
-                emptyState.style.display = 'none';
 
-                bookings.forEach((item, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="p-3 font-medium">${item.fullName}</td>
-                        <td class="p-3">
-                            <span class="font-semibold">${item.resourceName}</span><br>
-                            <span class="text-xs text-gray-500">${item.resourceType}</span>
-                        </td>
-                        <td class="p-3 text-xs">
-                            Từ: ${item.startTime.replace('T', ' ')}<br>
-                            Đến: ${item.endTime.replace('T', ' ')}
-                        </td>
-                        <td class="p-3">${item.purpose || 'Không có'}</td>
-                        <td class="p-3 text-center">
-                            <button onclick="deleteBooking(${index})" class="text-red-500 hover:text-red-700 text-xs bg-red-50 px-2 py-1 rounded border border-red-200">Xóa</button>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
+                const { data, error } = await supabaseClient.from('bookings').select('*');
+                if (error) {
+                    console.error('Lỗi tải dữ liệu:', error);
+                    return;
+                }
+
+                // Chuyển đổi dữ liệu sang định dạng sự kiện của FullCalendar
+                const events = data.map(item => ({
+                    title: `${item.resource_name} (${item.full_name})`,
+                    start: item.start_time,
+                    end: item.end_time,
+                    description: item.purpose,
+                    backgroundColor: item.resource_type.includes('Phòng') ? '#4f46e5' : '#0ea5e9',
+                    borderColor: item.resource_type.includes('Phòng') ? '#4338ca' : '#0284c7'
+                }));
+
+                calendar.removeAllEvents();
+                calendar.addEventSource(events);
             }
 
-            form.addEventListener('submit', (e) => {
+            // Xử lý gửi form đăng ký
+            const form = document.getElementById('bookingForm');
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                
+                if (!supabaseClient) {
+                    alert('Bạn chưa kết nối cơ sở dữ liệu Supabase!');
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Đang gửi...';
+
                 const newBooking = {
-                    fullName: document.getElementById('fullName').value,
-                    resourceType: document.getElementById('resourceType').value,
-                    resourceName: document.getElementById('resourceName').value,
-                    startTime: document.getElementById('startTime').value,
-                    endTime: document.getElementById('endTime').value,
+                    full_name: document.getElementById('fullName').value,
+                    resource_type: document.getElementById('resourceType').value,
+                    resource_name: document.getElementById('resourceName').value,
+                    start_time: document.getElementById('startTime').value,
+                    end_time: document.getElementById('endTime').value,
                     purpose: document.getElementById('purpose').value
                 };
 
-                // Kiểm tra logic thời gian đơn giản
-                if (newBooking.startTime >= newBooking.endTime) {
+                if (newBooking.start_time >= newBooking.end_time) {
                     alert('Thời gian kết thúc phải lớn hơn thời gian bắt đầu!');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Gửi Đăng Ký';
                     return;
                 }
 
-                bookings.push(newBooking);
-                localStorage.setItem('bookings', JSON.stringify(bookings));
-                renderBookings();
-                form.reset();
-                alert('Đăng ký thành công!');
+                const { error } = await supabaseClient.from('bookings').insert([newBooking]);
+
+                if (error) {
+                    alert('Có lỗi xảy ra khi đăng ký: ' + error.message);
+                } else {
+                    alert('Đăng ký thành công!');
+                    form.reset();
+                    loadBookings();
+                }
+
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Gửi Đăng Ký';
             });
 
-            window.deleteBooking = function(index) {
-                if (confirm('Bạn có chắc chắn muốn hủy lượt đăng ký này không?')) {
-                    bookings.splice(index, 1);
-                    localStorage.setItem('bookings', JSON.stringify(bookings));
-                    renderBookings();
-                }
-            };
+            // Tải dữ liệu lần đầu
+            loadBookings();
 
-            renderBookings();
+            // Lắng nghe thay đổi trực tiếp (Realtime) từ Supabase
+            if (supabaseClient) {
+                supabaseClient
+                    .channel('public:bookings')
+                    .on('postgres_changes', { event: '*', schema: 'public', table: 'bookings' }, payload => {
+                        loadBookings(); // Tự động làm tươi lại lịch khi có người đặt mới
+                    })
+                    .subscribe();
+            }
         });
     </script>
 </body>
